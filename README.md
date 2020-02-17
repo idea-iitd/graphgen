@@ -20,7 +20,7 @@ Then install the other dependencies.
 pip install -r requirements.txt
 ```
 
-[Boost](https://www.boost.org/) and [OpenMP](https://www.openmp.org/) are required for compling C++ binaries. Run `build.sh` script in the project's root directory.
+[Boost](https://www.boost.org/) (Version >= 1.70.0) and [OpenMP](https://www.openmp.org/) are required for compling C++ binaries. Run `build.sh` script in the project's root directory.
 
 ```bash
 ./build.sh
