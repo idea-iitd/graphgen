@@ -1,9 +1,9 @@
-networkx=2.2
-numpy=1.15.4
-sklearn=1.1.0
-scipy=1.1.0
-pyemd=0.5.1
-tensorboard
+networkx==2.2
+numpy==1.15.4
+scikit-learn==0.20.1
+scipy==1.1.0
+pyemd==0.5.1
+tensorboard==2.1.0
+tqdm==4.28.1
 dgl-cu100
 git+https://github.com/fabriziocosta/EDeN.git
-
