@@ -203,7 +203,7 @@ def predict_graphs(eval_args):
             graph = graph_from_dfscode(dfscode)
 
             # Remove self loops
-            graph.remove_edges_from(graph.selfloop_edges())
+            graph.remove_edges_from(nx.selfloop_edges(graph))
 
             # Take maximum connected component
             if len(graph.nodes()):

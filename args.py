@@ -24,9 +24,10 @@ class Args:
         # Algorithm Version - # Algorithm Version - GraphRNN  | DFScodeRNN (GraphGen) | DGMG (Deep GMG)
         self.note = 'DFScodeRNN'
 
-        # Check datasets/process_dataset for datasets | Add _inactive and _active with chemical compounds if you want specific category
+        # Check datasets/process_dataset for datasets
         # Select dataset to train the model
-        self.graph_type = 'Lung_inactive'
+        self.graph_type = 'Lung'
+        self.num_graphs = None  # Set it None to take complete dataset
 
         # Whether to produce networkx format graphs for real datasets
         self.produce_graphs = True

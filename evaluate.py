@@ -49,11 +49,8 @@ class ArgsEvaluate():
 
 
 def patch_graph(graph):
-    # for u, v in graph.edges():
-    #     graph.edges[u, v]['label'] = 'DEFAULT_LABEL'
-
-    # for u in graph.nodes():
-    #     graph.nodes[u]['label'] = graph.nodes[u]['label'].split('-')[0]
+    for u in graph.nodes():
+        graph.nodes[u]['label'] = graph.nodes[u]['label'].split('-')[0]
 
     return graph
 
