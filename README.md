@@ -2,6 +2,8 @@
 
 This repository is the official PyTorch implementation of GraphGen, a generative graph model using auto-regressive model.
 
+Nikhil Goyal, Harsh Vardhan Jain, and [Sayan Ranu](http://www.cse.iitd.ac.in/~sayan/index.html), [GraphGen: A Scalable Approach to Domain-agnostic Labeled Graph Generation](https://arxiv.org/pdf/2001.08184.pdf), in WWW, 2020.
+
 Most of the code has been adapted from [GraphRNN](https://github.com/snap-stanford/GraphRNN)
 
 ## Installation
