@@ -44,30 +44,63 @@ struct DfsEdge {
              << edge_label << "," << label2 << ">";
     }
 
+    // Compare only edge and vertex labels
+    bool compare_labels_less(DfsEdge e) {
+        if (this->label1 < e.label1) {
+            return true;
+        }
+
+        if (this->label1 == e.label1 && this->edge_label < e.edge_label) {
+            return true;
+        }
+            
+        if (this->label1 == e.label1 &&
+            this->edge_label == e.edge_label && this->label2 < e.label2) {
+            return true;
+        }
+
+        return false;
+    }
+
     // operator overloading for comparison
+    // Don't assume vertex1 is same and write complete comparator for code reuse and avoid confusion
+    // DFS codes order - https://sites.cs.ucsb.edu/~xyan/papers/gSpan.pdf (Section 4)
     bool operator<(DfsEdge e) {
-        if (this->vertex2 < this->vertex1 && e.vertex2 > e.vertex1)
-            return true;
-        if (this->vertex2 < this->vertex1 && e.vertex2 < e.vertex1 &&
-            this->vertex2 < e.vertex2)
-            return true;
-        if (this->vertex2 < this->vertex1 && e.vertex2 < e.vertex1 &&
-            this->vertex2 == e.vertex2 && this->edge_label < e.edge_label)
-            return true;
-        if (this->vertex2 > this->vertex1 && e.vertex2 > e.vertex1 &&
-            e.vertex1 < this->vertex1)
-            return true;
-        if (this->vertex2 > this->vertex1 && e.vertex2 > e.vertex1 &&
-            e.vertex1 == this->vertex1 && this->label1 < e.label1)
-            return true;
-        if (this->vertex2 > this->vertex1 && e.vertex2 > e.vertex1 &&
-            e.vertex1 == this->vertex1 && this->label1 == e.label1 &&
-            this->edge_label < e.edge_label)
-            return true;
-        if (this->vertex2 > this->vertex1 && e.vertex2 > e.vertex1 &&
-            e.vertex1 == this->vertex1 && this->label1 == e.label1 &&
-            this->edge_label == e.edge_label && this->label2 < e.label2)
-            return true;
+        // Both forward edges
+        if (this->vertex2 > this->vertex1 && e.vertex2 > e.vertex1) {
+            if (this->vertex2 < e.vertex2) {
+                return true;
+            } else if (this->vertex2 == e.vertex2) {
+                if (compare_labels_less(e)) {
+                    return true;
+                }
+            }
+        }
+        // Both backward edges
+        else if (this->vertex2 < this->vertex1 && e.vertex2 < e.vertex1) {
+            if (this->vertex1 < e.vertex1) {
+                return true;
+            } else if (this->vertex1 == e.vertex1 && this->vertex2 < e.vertex2) {
+                return true;
+            } else if (this->vertex1 == e.vertex1 && this->vertex2 == e.vertex2) {
+                if (compare_labels_less(e)) {
+                    return true;
+                }
+            }
+        }
+        // this is backward edge and e is forward edge
+        else if (this->vertex2 < this->vertex1 && e.vertex2 > e.vertex1) {
+            if (this->vertex1 < e.vertex2) {
+                return true;
+            }
+        } 
+        // this is forward edge and e is backward edge
+        else if (this->vertex2 > this->vertex1 && e.vertex2 < e.vertex1) {
+            if (this->vertex2 <= e.vertex1) {
+                return true;
+            }
+        }
+
         return false;
     }
 
