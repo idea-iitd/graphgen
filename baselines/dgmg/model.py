@@ -189,7 +189,7 @@ class AddNode(nn.Module):
                 graph_embed], dim=1))
         g.nodes[num_nodes - 1].data['hv'] = hv_init
         g.nodes[num_nodes - 1].data['a'] = self.init_node_activation
-        g.nodes[num_nodes - 1].data['label'] = torch.LongTensor([[node_type]])
+        g.nodes[num_nodes - 1].data['label'] = torch.LongTensor([[node_type]]).to(device=self.device)
 
     def prepare_training(self):
         """
@@ -352,7 +352,7 @@ class ChooseDestAndUpdate(nn.Module):
             torch.LongTensor(edge_types).to(device=self.device))
         g.edges[src_list, dest_list].data['he'] = edge_repr
         g.edges[src_list, dest_list].data['label'] = torch.LongTensor(
-            edge_types).unsqueeze(1)
+            edge_types).unsqueeze(1).to(device=self.device)
 
     def prepare_training(self):
         """
@@ -474,7 +474,7 @@ class DGMG(nn.Module):
         self.g_active = list(range(batch_size))
 
         for i in range(batch_size):
-            g = dgl.DGLGraph()
+            g = dgl.DGLGraph().to(self.device)
             g.index = i
 
             # If there are some features for nodes and edges,
